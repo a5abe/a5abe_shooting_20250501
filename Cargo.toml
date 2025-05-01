@@ -2,9 +2,31 @@
 name = "a5abe_shooting_20250501"
 version = "0.1.0"
 edition = "2024"
+description = "A simple shooting game made with Rust and WebAssembly"
+authors = ["eda <eda@example.com>"]
+
+[lib]
+crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 console_error_panic_hook = "0.1.7"
 js-sys = "0.3.77"
 wasm-bindgen = "0.2.100"
-web-sys = "0.3.77"
+web-sys = { version = "0.3.77", features = [
+    "CanvasRenderingContext2d",
+    "Document",
+    "Element",
+    "HtmlCanvasElement",
+    "Window",
+    "KeyboardEvent",
+    "EventTarget",
+    "MouseEvent",
+    "DomRect",
+    "Performance",
+    "console",
+]}
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
