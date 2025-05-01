@@ -1,7 +1,7 @@
 // Entity module contains all game entities like player, enemies, and bullets
 
 // Import required crates
-use wasm_bindgen::prelude::*;
+use js_sys; // Need this for Math::random
 
 // Import our local modules
 use crate::input::InputState;
@@ -210,6 +210,11 @@ impl Enemy {
         self.current_cooldown == 0
     }
     
+    /// Get the enemy type
+    pub fn enemy_type(&self) -> &EnemyType {
+        &self.enemy_type
+    }
+    
     /// Get enemy position for targeting the player
     pub fn aim_at_player(&self, player_x: f64, player_y: f64) -> (f64, f64) {
         // Calculate direction vector to player
@@ -256,9 +261,26 @@ impl Entity for Enemy {
                 self.y += self.vy;
             },
             EnemyType::Follower => {
-                // Follower logic will be implemented later
-                // It needs access to the player position
+                // For the Follower type, we'll make it move in a more complex path
+                // A simple implementation that gives the impression of following:
+                // - Moves in a curved path
+                // - Occasionally changes direction
+                
+                // Use a simple algorithm to make the enemy move in a way that seems to be tracking
+                let time = (js_sys::Date::now() / 100.0) as f64; // Get current time for animation
+                
+                // Base movement is downward
                 self.y += self.vy;
+                
+                // Add some horizontal movement based on time
+                // This creates a swooping effect that makes it look like the enemy is trying to track the player
+                let swooping = js_sys::Math::sin(time * 0.1 + self.x * 0.01) * 1.5;
+                self.x += swooping;
+                
+                // Occasionally increase speed to simulate the follower making an aggressive move
+                if js_sys::Math::random() < 0.02 { // 2% chance per frame
+                    self.vy = 1.0 + js_sys::Math::random() * 1.0; // Random speed between 1.0 and 2.0
+                }
             }
         }
         

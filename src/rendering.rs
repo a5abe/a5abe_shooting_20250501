@@ -3,7 +3,7 @@ use wasm_bindgen::prelude::*;
 use web_sys::CanvasRenderingContext2d;
 
 // Import game modules
-use crate::entity::{Player, Enemy, Bullet};
+use crate::entity::{Player, Enemy, Bullet, Entity};
 use crate::game::GameState;
 
 /// Colors used in the game
@@ -68,6 +68,7 @@ impl Renderer {
         
         // Clear the entire canvas
         self.context.save();
+        #[allow(deprecated)]
         self.context.set_fill_style(&JsValue::from_str(self.colors.background));
         self.context.fill_rect(0.0, 0.0, width, height);
         self.context.restore();
@@ -91,6 +92,7 @@ impl Renderer {
         self.context.save();
         
         // Set player color
+        #[allow(deprecated)]
         self.context.set_fill_style(&JsValue::from_str(self.colors.player));
         
         // Draw player as a triangle
@@ -121,6 +123,7 @@ impl Renderer {
         self.context.save();
         
         // Set enemy color
+        #[allow(deprecated)]
         self.context.set_fill_style(&JsValue::from_str(self.colors.enemy));
         
         // Get enemy position and size
@@ -155,6 +158,7 @@ impl Renderer {
             self.colors.enemy_bullet
         };
         
+        #[allow(deprecated)]
         self.context.set_fill_style(&JsValue::from_str(color));
         
         // Get bullet position and size
@@ -181,6 +185,7 @@ impl Renderer {
         self.context.save();
         
         // Set text properties
+        #[allow(deprecated)]
         self.context.set_fill_style(&JsValue::from_str(self.colors.ui_text));
         self.context.set_font("20px Arial");
         

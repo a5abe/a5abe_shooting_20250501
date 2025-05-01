@@ -1,6 +1,6 @@
 // Import necessary libraries for WebAssembly and browser interaction
 use wasm_bindgen::prelude::*;
-use web_sys::{HtmlCanvasElement, CanvasRenderingContext2d, Window, Document};
+use web_sys::HtmlCanvasElement;
 
 // Import modules (we will create these next)
 mod game;
