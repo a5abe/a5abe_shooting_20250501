@@ -1,3 +1,11 @@
-# a5abe_shooting_20250501
+## 🧭 Code Style & Guidelines
 
-My journey begins here.
+This project follows a set of internal coding conventions for Rust + WebAssembly integration.
+
+👉 See [`docs/code_style.md`](docs/code_style.md) for detailed guidance on:
+- Naming conventions
+- Error handling strategies
+- Testing structure
+- Performance tuning
+- Security precautions
+- Code review criteria
